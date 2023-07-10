@@ -19,7 +19,11 @@ export default function Blog(params) {
   }, []);
 
   if (!apiData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="container d-flex align-items-center justify-content-center">
+        Loading...
+      </div>
+    );
   }
   return (
     <>

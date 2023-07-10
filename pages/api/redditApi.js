@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   try {
     const response = await fetch(
-      "https://www.reddit.com/r/delhi/hot.json?limit=50"
+      "https://www.reddit.com/r/IndianDankMemes/top.json?limit=50"
     );
     const data = await response.json();
 
