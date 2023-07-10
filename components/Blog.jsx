@@ -9,6 +9,7 @@ export default function Blog(params) {
       try {
         const response = await fetch("/api/redditApi");
         const data = await response.json();
+        console.log(data);
         setApiData(data);
       } catch (error) {
         console.error(error);
@@ -76,17 +77,15 @@ export default function Blog(params) {
                   <div class="card bg-transparent rounded-0 border border-dark mb-4 p-4">
                     {item.data.is_video ? (
                       <video
-                        src={item.data.media?.reddit_video?.fallback_url}
+                        src={`${item.data.media?.reddit_video?.fallback_url?.replaceAll(
+                          "&amp;",
+                          "&"
+                        )}`}
                         class="card-img-top rounded-0"
                         alt={item.data.title}
                         allowFullScreen
                         autoPlay
                         controls
-                      />
-                    ) : item.data.thumbnail != "self" ? (
-                      <img
-                        src={`${item.data.thumbnail}`}
-                        alt={item.data.title}
                       />
                     ) : item.data.preview != undefined ? (
                       <img
@@ -94,6 +93,11 @@ export default function Blog(params) {
                           "&amp;",
                           "&"
                         )}`}
+                        alt={item.data.title}
+                      />
+                    ) : item.data.thumbnail != "self" ? (
+                      <img
+                        src={`${item.data.thumbnail}`}
                         alt={item.data.title}
                       />
                     ) : (
@@ -121,7 +125,9 @@ export default function Blog(params) {
                           </svg>
                         </div>
                       </div>
-                      <p class="card-text">{item.data.selftext}</p>
+                      <p class="card-text">
+                        {item.data.selftext.slice(0, 900)}
+                      </p>
                     </div>
                   </div>
                 </div>
