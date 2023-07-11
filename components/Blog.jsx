@@ -99,7 +99,12 @@ export default function Blog() {
                     { heading: "Technology", href: "/?category=technology" },
                     { heading: "Memes", href: "/?category=memes" },
                   ].map((item, index) => (
-                    <li className="nav-item mx-0 py-1" key={index}>
+                    <li
+                      className="nav-item mx-0 py-1"
+                      key={index}
+                      data-bs-dismiss="offcanvas"
+                      aria-label="Close"
+                    >
                       <Link
                         className="nav-link active"
                         aria-current="page"
