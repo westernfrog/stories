@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 function isActive(href, category) {
-  const currentCategory = category || "world";
+  const currentCategory = category || "all";
   return href.includes(currentCategory);
 }
 
@@ -11,7 +11,7 @@ export default function Blog() {
   const router = useRouter();
   const { query } = router;
   const [apiData, setApiData] = useState(null);
-  const defaultCategory = "world";
+  const defaultCategory = "all";
   const category = query.category || defaultCategory;
 
   useEffect(() => {
@@ -89,7 +89,7 @@ export default function Blog() {
               <div className="offcanvas-body">
                 <ul className="navbar-nav">
                   {[
-                    { heading: "View all", href: "/?category=world" },
+                    { heading: "View all", href: "/?category=all" },
                     { heading: "India", href: "/?category=IndiaSpeaks" },
                     { heading: "Politics", href: "/?category=politics" },
                     { heading: "Biology", href: "/?category=Awwducational" },
@@ -146,7 +146,7 @@ export default function Blog() {
             </div>
             <ul className="navbar-nav d-lg-block d-none">
               {[
-                { heading: "View all", href: "/?category=world" },
+                { heading: "View all", href: "/?category=all" },
                 { heading: "India", href: "/?category=IndiaSpeaks" },
                 { heading: "Politics", href: "/?category=politics" },
                 { heading: "Biology", href: "/?category=Awwducational" },
@@ -209,7 +209,6 @@ export default function Blog() {
                         className="card-img-top rounded-0"
                         alt={item.data.domain}
                         allowFullScreen
-                        autoPlay
                         controls
                       />
                     ) : item.data.media_metadata != undefined ? (

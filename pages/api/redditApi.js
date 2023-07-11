@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   try {
     const { category } = req.query;
     const response = await fetch(
-      `https://www.reddit.com/r/${category}/new.json?count=20`
+      `https://www.reddit.com/r/${category}/hot.json?count=20`
     );
     const data = await response.json();
 
