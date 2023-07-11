@@ -8,10 +8,12 @@ export default function Overview(params) {
           </div>
           <div className="col-lg-6">
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Repudiandae itaque quam ab expedita soluta perspiciatis atque
-              consequuntur. Eaque blanditiis aliquid obcaecati ipsa eveniet
-              nesciunt in nam, eius culpa, incidunt nihil.
+              Immerse yourself in a world of stories that span across various
+              topics, from fascinating facts to the wonders of science, the
+              mysteries of space, the pulse of politics, and the endless realms
+              of technology. Discover firsthand accounts, breathtaking imagery,
+              and enlightening perspectives shared by a vibrant community of
+              contributors.
             </p>
           </div>
         </div>
