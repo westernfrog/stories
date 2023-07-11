@@ -2,6 +2,11 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+function isActive(href, category) {
+  const currentCategory = category || "world";
+  return href.includes(currentCategory);
+}
+
 export default function Blog() {
   const router = useRouter();
   const { query } = router;
@@ -14,7 +19,6 @@ export default function Blog() {
       try {
         const response = await fetch(`/api/redditApi?category=${category}`);
         const data = await response.json();
-        console.log(data);
         setApiData(data);
       } catch (error) {
         console.error(error);
@@ -29,13 +33,6 @@ export default function Blog() {
       shallow: true,
     });
   }, [category]);
-
-  function isActive(href) {
-    const { query } = useRouter();
-    const currentCategory = query.category || "world";
-
-    return href.includes(currentCategory);
-  }
 
   if (!apiData) {
     return (
@@ -59,24 +56,24 @@ export default function Blog() {
               Filters
             </button>
             <div
-              class="offcanvas offcanvas-end border-0 d-lg-none"
+              className="offcanvas offcanvas-end border-0 d-lg-none"
               tabIndex="-1"
               id="filter"
               aria-labelledby="filterLabel"
               style={{ width: "70%" }}
             >
-              <div class="offcanvas-header">
+              <div className="offcanvas-header">
                 <button
                   type="button"
-                  class="btn btn-sm ms-auto rounded-0 p-0 text-black"
+                  className="btn btn-sm ms-auto rounded-0 p-0 text-black"
                   data-bs-dismiss="offcanvas"
                   aria-label="Close"
                 >
                   Close
                 </button>
               </div>
-              <div class="offcanvas-body">
-                <ul class="navbar-nav">
+              <div className="offcanvas-body">
+                <ul className="navbar-nav">
                   {[
                     { heading: "View all", href: "/?category=world" },
                     { heading: "India", href: "/?category=IndiaSpeaks" },
@@ -88,12 +85,7 @@ export default function Blog() {
                     { heading: "Technology", href: "/?category=technology" },
                     { heading: "Memes", href: "/?category=memes" },
                   ].map((item, index) => (
-                    <li
-                      className="nav-item mx-0 py-1"
-                      key={index}
-                      data-bs-dismiss="offcanvas"
-                      aria-label="Close"
-                    >
+                    <li className="nav-item mx-0 py-1" key={index}>
                       <Link
                         className="nav-link active"
                         aria-current="page"
@@ -101,7 +93,7 @@ export default function Blog() {
                       >
                         <div className="row">
                           <div className="col-3">
-                            {isActive(item.href) ? (
+                            {isActive(item.href, category) ? (
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -133,7 +125,7 @@ export default function Blog() {
                 </ul>
               </div>
             </div>
-            <ul class="navbar-nav d-lg-block d-none">
+            <ul className="navbar-nav d-lg-block d-none">
               {[
                 { heading: "View all", href: "/?category=world" },
                 { heading: "India", href: "/?category=IndiaSpeaks" },
@@ -152,8 +144,8 @@ export default function Blog() {
                     href={item.href}
                   >
                     <div className="row">
-                      <div className="col-2">
-                        {isActive(item.href) ? (
+                      <div className="col-3">
+                        {isActive(item.href, category) ? (
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -188,14 +180,14 @@ export default function Blog() {
             <div className="row" data-masonry='{"percentPosition": true }'>
               {apiData.map((item, index) => (
                 <div className="col-md-6" key={index}>
-                  <div class="card bg-transparent rounded-0 border border-dark mb-4 p-4">
+                  <div className="card bg-transparent rounded-0 border border-dark mb-4 p-4">
                     {item.data.is_video ? (
                       <video
                         src={`${item.data.media?.reddit_video?.fallback_url?.replaceAll(
                           "&amp;",
                           "&"
                         )}`}
-                        class="card-img-top rounded-0"
+                        className="card-img-top rounded-0"
                         alt={item.data.domain}
                         allowFullScreen
                         autoPlay
@@ -226,9 +218,9 @@ export default function Blog() {
                     ) : (
                       <></>
                     )}
-                    <div class="card-body px-0 pb-0">
-                      <p class="card-text">{item.data.title}</p>
-                      <p class="card-text">{item.data.selftext}</p>
+                    <div className="card-body px-0 pb-0">
+                      <p className="card-text">{item.data.title}</p>
+                      <p className="card-text">{item.data.selftext}</p>
                     </div>
                   </div>
                 </div>

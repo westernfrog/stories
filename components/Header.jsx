@@ -3,13 +3,13 @@ import Link from "next/link";
 export default function Header(params) {
   return (
     <>
-      <nav class="container navbar navbar-expand-lg sticky-top py-3 bg-newspaper">
-        <div class="container-fluid">
-          <Link class="navbar-brand pb-2" href="#">
+      <nav className="container navbar navbar-expand-lg sticky-top py-3 bg-newspaper">
+        <div className="container-fluid">
+          <Link className="navbar-brand pb-2" href="/">
             Stories
           </Link>
           <button
-            class="navbar-toggler p-0 border-0"
+            className="navbar-toggler p-0 border-0"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasRight"
@@ -31,8 +31,8 @@ export default function Header(params) {
               />
             </svg>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto ms-5">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto ms-5">
               {[
                 { heading: "Overview", href: "/" },
                 { heading: "About", href: "/about" },
@@ -45,8 +45,8 @@ export default function Header(params) {
                   href: "https://github.com/westernfrog/stories",
                 },
               ].map((item, index) => (
-                <li class="nav-item" key={index}>
-                  <Link class="nav-link active" href={item.href}>
+                <li className="nav-item" key={index}>
+                  <Link className="nav-link active" href={item.href}>
                     <span>{item.heading}</span>
                   </Link>
                 </li>
@@ -76,23 +76,23 @@ export default function Header(params) {
         </div>
       </nav>
       <div
-        class="offcanvas offcanvas-end border-0"
+        className="offcanvas offcanvas-end border-0"
         tabIndex="-1"
         id="offcanvasRight"
         aria-labelledby="offcanvasRightLabel"
       >
-        <div class="offcanvas-header">
+        <div className="offcanvas-header">
           <button
             type="button"
-            class="btn btn-sm ms-auto rounded-0 p-0 text-black"
+            className="btn btn-sm ms-auto rounded-0 p-0 text-black"
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           >
             Close
           </button>
         </div>
-        <div class="offcanvas-body vh-100 d-grid">
-          <ul class="navbar-nav">
+        <div className="offcanvas-body vh-100 d-grid">
+          <ul className="navbar-nav">
             {[
               { heading: "Overview", href: "/" },
               { heading: "About", href: "/about" },
@@ -106,13 +106,13 @@ export default function Header(params) {
               },
             ].map((item, index) => (
               <li
-                class="nav-item mx-0 py-1"
+                className="nav-item mx-0 py-1"
                 key={index}
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
               >
                 <Link
-                  class="nav-link active border-bottom border-dark"
+                  className="nav-link active border-bottom border-dark"
                   aria-current="page"
                   href={item.href}
                 >
