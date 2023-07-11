@@ -6,7 +6,7 @@ export default function Blog() {
   const router = useRouter();
   const { query } = router;
   const [apiData, setApiData] = useState(null);
-  const defaultCategory = "all";
+  const defaultCategory = "world";
   const category = query.category || defaultCategory;
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Blog() {
 
   function isActive(href) {
     const { query } = useRouter();
-    const currentCategory = query.category || "all";
+    const currentCategory = query.category || "world";
 
     return href.includes(currentCategory);
   }
