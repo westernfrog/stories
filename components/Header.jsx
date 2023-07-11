@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Header(params) {
   return (
     <>
-      <nav class="container navbar navbar-expand-lg sticky-top py-3 border-bottom bg-newspaper">
+      <nav class="container navbar navbar-expand-lg sticky-top py-3 bg-newspaper">
         <div class="container-fluid">
           <Link class="navbar-brand pb-2" href="#">
             Stories

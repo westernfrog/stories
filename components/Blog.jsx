@@ -1,13 +1,18 @@
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-export default function Blog(params) {
+export default function Blog() {
+  const router = useRouter();
+  const { query } = router;
   const [apiData, setApiData] = useState(null);
+  const defaultCategory = "all";
+  const category = query.category || defaultCategory;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/api/redditApi");
+        const response = await fetch(`/api/redditApi?category=${category}`);
         const data = await response.json();
         console.log(data);
         setApiData(data);
@@ -17,7 +22,13 @@ export default function Blog(params) {
     };
 
     fetchData();
-  }, []);
+  }, [category]);
+
+  useEffect(() => {
+    router.push({ pathname: router.pathname, query: { category } }, undefined, {
+      shallow: true,
+    });
+  }, [category]);
 
   if (!apiData) {
     return (
@@ -33,16 +44,19 @@ export default function Blog(params) {
           <div className="col-md-3">
             <ul class="navbar-nav">
               {[
-                { heading: "View all", href: "/" },
-                { heading: "India", href: "/" },
-                { heading: "Politics", href: "/" },
-                { heading: "Science & Technology", href: "/" },
-                { heading: "Facts", href: "/" },
-                { heading: "Memes", href: "/" },
+                { heading: "View all", href: "/?category=world" },
+                { heading: "India", href: "/?category=IndiaSpeaks" },
+                { heading: "Politics", href: "/?category=politics" },
+                { heading: "Biology", href: "/?category=Awwducational" },
+                { heading: "Facts", href: "/?category=MysteriousFacts" },
+                { heading: "Space", href: "/?category=space" },
+                { heading: "Science", href: "/?category=science" },
+                { heading: "Technology", href: "/?category=technology" },
+                { heading: "Memes", href: "/?category=memes" },
               ].map((item, index) => (
-                <li class="nav-item mx-0 py-1" key={index}>
+                <li className="nav-item mx-0 py-1" key={index}>
                   <Link
-                    class="nav-link active"
+                    className="nav-link active"
                     aria-current="page"
                     href={item.href}
                   >
@@ -71,7 +85,7 @@ export default function Blog(params) {
             </ul>
           </div>
           <div className="col-md-9">
-            <div className="row">
+            <div className="row" data-masonry='{"percentPosition": true }'>
               {apiData.map((item, index) => (
                 <div className="col-md-6" key={index}>
                   <div class="card bg-transparent rounded-0 border border-dark mb-4 p-4">
@@ -82,10 +96,19 @@ export default function Blog(params) {
                           "&"
                         )}`}
                         class="card-img-top rounded-0"
-                        alt={item.data.title}
+                        alt={item.data.domain}
                         allowFullScreen
                         autoPlay
                         controls
+                      />
+                    ) : item.data.media_metadata != undefined ? (
+                      <img
+                        src={`${
+                          Object.values(
+                            item.data.media_metadata
+                          )[0].s.u.replaceAll("&amp;", "&") || " "
+                        }`}
+                        alt={item.data.domain}
                       />
                     ) : item.data.preview != undefined ? (
                       <img
@@ -93,41 +116,19 @@ export default function Blog(params) {
                           "&amp;",
                           "&"
                         )}`}
-                        alt={item.data.title}
+                        alt={item.data.domain}
                       />
                     ) : item.data.thumbnail != "self" ? (
                       <img
                         src={`${item.data.thumbnail}`}
-                        alt={item.data.title}
+                        alt={item.data.domain}
                       />
                     ) : (
                       <></>
                     )}
                     <div class="card-body px-0 pb-0">
-                      <div className="row">
-                        <div className="col">
-                          <h5 class="card-title">{item.data.title}</h5>
-                        </div>
-                        <div className="col-2 text-end">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth={2}
-                            stroke="currentColor"
-                            style={{ width: "20px" }}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <p class="card-text">
-                        {item.data.selftext.slice(0, 900)}
-                      </p>
+                      <p class="card-text">{item.data.title}</p>
+                      <p class="card-text">{item.data.selftext}</p>
                     </div>
                   </div>
                 </div>

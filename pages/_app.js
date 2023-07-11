@@ -16,6 +16,12 @@ export default function App({ Component, pageProps }) {
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossOrigin="anonymous"
       />
+      <Script
+        src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+        integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+        crossOrigin="anonymous"
+        async
+      />
       <Component {...pageProps} />
     </>
   );
