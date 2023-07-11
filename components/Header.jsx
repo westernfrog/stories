@@ -140,7 +140,7 @@ export default function Header(params) {
               </li>
             ))}
           </ul>
-          <div className="d-flex align-items-end mb-2">
+          <div className="d-flex align-items-end">
             <button className="btn border border-dark w-100 rounded-0 py-1">
               Let&apos;s Talk
               <svg
