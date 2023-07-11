@@ -35,10 +35,15 @@ export default function Header(params) {
             <ul class="navbar-nav me-auto ms-5">
               {[
                 { heading: "Overview", href: "/" },
-                { heading: "Explore", href: "/about" },
-                { heading: "About", href: "/#work" },
-                { heading: "API Docs", href: "/product" },
-                { heading: "Github", href: "/services" },
+                { heading: "About", href: "/about" },
+                {
+                  heading: "API Docs",
+                  href: "https://www.reddit.com/dev/api/",
+                },
+                {
+                  heading: "Github",
+                  href: "https://github.com/westernfrog/stories",
+                },
               ].map((item, index) => (
                 <li class="nav-item" key={index}>
                   <Link class="nav-link active" href={item.href}>
@@ -90,10 +95,15 @@ export default function Header(params) {
           <ul class="navbar-nav">
             {[
               { heading: "Overview", href: "/" },
-              { heading: "Explore", href: "/about" },
-              { heading: "About", href: "/#work" },
-              { heading: "API Docs", href: "/product" },
-              { heading: "Github", href: "/services" },
+              { heading: "About", href: "/about" },
+              {
+                heading: "API Docs",
+                href: "https://www.reddit.com/dev/api/",
+              },
+              {
+                heading: "Github",
+                href: "https://github.com/westernfrog/stories",
+              },
             ].map((item, index) => (
               <li
                 class="nav-item mx-0 py-1"
