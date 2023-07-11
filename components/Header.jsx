@@ -46,7 +46,11 @@ export default function Header(params) {
                 },
               ].map((item, index) => (
                 <li className="nav-item" key={index}>
-                  <Link className="nav-link active" href={item.href}>
+                  <Link
+                    className="nav-link active"
+                    href={item.href}
+                    target="_blank"
+                  >
                     <span>{item.heading}</span>
                   </Link>
                 </li>
@@ -115,6 +119,7 @@ export default function Header(params) {
                   className="nav-link active border-bottom border-dark"
                   aria-current="page"
                   href={item.href}
+                  target="_blank"
                 >
                   <div className="row">
                     <div className="col">{item.heading}</div>
